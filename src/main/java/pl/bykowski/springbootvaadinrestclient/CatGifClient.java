@@ -2,9 +2,6 @@ package pl.bykowski.springbootvaadinrestclient;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import javafx.application.Application;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
