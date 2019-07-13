@@ -16,16 +16,14 @@ public class CatFactClient {
     RestTemplate restTemplate = new RestTemplate();
 
     public CatFact getCatFactFormApi() {
-
         ResponseEntity<CatFact> exchange = restTemplate.exchange(
                 "https://cat-fact.herokuapp.com/facts/random",
                 HttpMethod.GET,
                 HttpEntity.EMPTY,
                 CatFact.class);
-
         return exchange.getBody();
-
     }
+
 
 
 
