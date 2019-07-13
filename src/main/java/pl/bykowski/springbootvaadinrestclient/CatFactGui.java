@@ -1,5 +1,6 @@
 package pl.bykowski.springbootvaadinrestclient;
 
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
@@ -10,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CatFactGui extends HorizontalLayout {
 
     @Autowired
-    public CatFactGui(CatFactClient catFactClient) {
+    public CatFactGui(CatFactClient catFactClient,CatGifClient catGifClient ) {
         CatFact catFact = catFactClient.getCatFactFormApi();
         Label label = new Label(catFact.getText());
-        add(label);
-
-
+        Image image = new Image(catGifClient.getCatGifFormApi(), "ni ma...");
+        add(label, image);
     }
 }

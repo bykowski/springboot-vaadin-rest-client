@@ -2,6 +2,9 @@ package pl.bykowski.springbootvaadinrestclient;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import javafx.application.Application;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -18,16 +21,20 @@ public class CatGifClient {
     }
 
     public String getCatGifFormApi() {
-        ResponseEntity<String> exchange = restTemplate.exchange(
-                "https://aws.random.cat/meow",
-                HttpMethod.GET,
-                HttpEntity.EMPTY,
-                String.class);
+        String url;
+        while (true) {
+            ResponseEntity<String> exchange = restTemplate.exchange(
+                    "https://aws.random.cat/meow",
+                    HttpMethod.GET,
+                    HttpEntity.EMPTY,
+                    String.class);
 
-        String json = exchange.getBody();
-        JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-        String url = jsonObject.get("file").getAsString();
+            String json = exchange.getBody();
+            JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
+            url = jsonObject.get("file").getAsString();
+            if(url.endsWith(".gif"))
+                break;
+        }
         return url;
     }
-
 }
